@@ -16,7 +16,7 @@ router.get('/home',(req,res)=>{
         message:"hello",
         name: req.query.name,
         city: req.query.city,
-        // rent: req.query.rent,
+        //rent: req.query.rent,
         // buy: req.query.buy,
         // squareMeter: req.query.squareMeter,
         // availableFrom: req.query.availableFrom,
