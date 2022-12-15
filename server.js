@@ -25,4 +25,4 @@ app.use(bodyparser.urlencoded({
 const housesRouter =require('./routes/houseRoutes')
 app.use('/', housesRouter)
 
-app.listen(process.env.PORT || 3000, () => console.log('server Started'))
+app.listen(process.env.PORT || 8000, () => console.log('server Started'))
