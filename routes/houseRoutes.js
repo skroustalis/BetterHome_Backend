@@ -12,6 +12,20 @@ router.get('/', async (req, res) => {
 })
 router.get('/home',(req,res)=>{
     console.log((req.query))
+    return res.json({
+        message:"hello",
+        name: req.query.name,
+        city: req.query.city,
+        // rent: req.query.rent,
+        // buy: req.query.buy,
+        // squareMeter: req.query.squareMeter,
+        // availableFrom: req.query.availableFrom,
+        // furnished: req.query.furnished,
+        // elevator: req.query.elevator,
+        // petAllowed: req.query.petAllowed,
+        // flor: req.query.flor,
+        // typeOfHeating: req.query.typeOfHeating
+    })
 })
 
 router.post('/home', async  (req, res) => {
