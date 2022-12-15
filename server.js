@@ -23,6 +23,6 @@ app.use(bodyparser.urlencoded({
 }))
 
 const housesRouter =require('./routes/houseRoutes')
-app.use('/houses', housesRouter)
+app.use('/', housesRouter)
 
 app.listen(3000, () => console.log('server Started'))
