@@ -4,8 +4,6 @@ const bodyparser=require('body-parser')
 const dotenv = require('dotenv')
 const expressLayouts = require('express-ejs-layouts')
 
-var port = process.env.PORT || 3000;
-
 const app = express()
 dotenv.config({path:'.env'})
 
@@ -27,4 +25,4 @@ app.use(bodyparser.urlencoded({
 const housesRouter =require('./routes/houseRoutes')
 app.use('/', housesRouter)
 
-app.listen(port, () => console.log('server Started'))
+app.listen(process.env.PORT || 3000, () => console.log('server Started'))
