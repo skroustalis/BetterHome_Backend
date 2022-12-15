@@ -1,36 +1,69 @@
 const express = require('express')
 const router = express.Router()
-const houseModel = require('../models/houseModel')
+var Housedb = require('../models/houseModel')
 
-// router.get('/', async (req, res) => {
-    
-//     try{
-//         const houses = await house.find()
-//         res.json(houses)
-//     }catch(err){
-//         res.status(500).json({message: err.message})
-//     }
-// })
-
-// // Getting one
-// router.get('/:id', (req,res) => {
-//     res.send(req.params.id)
-// })
-
-// Create one
-router.post('/', (req,res) => {
-    const addhouse = new house('sok')
-    
-    console.log(addhouse)
+router.get('/', async (req, res) => {
     try{
-        const newHouse = addhouse.save()
+        const house = await Housedb.find()
+         res.json(house)   
+        }catch (err) {
+            res.status(500).json({message: err.message})
+        }   
+})
+router.get('/home',(req,res)=>{
+    console.log((req.query))
+})
+
+router.post('/home', async  (req, res) => {
+    // var a = {name: req.body.name}
+    // console.log(a)
+    const house = new Housedb({
+        name: req.body.name,
+        city: req.body.city,
+        rent: req.body.rent,
+        buy: req.body.buy,
+        squareMeter: req.body.squareMeter,
+        availableFrom: req.body.availableFrom,
+        furnished: req.body.furnished,
+        elevator: req.body.elevator,
+        petAllowed: req.body.petAllowed,
+        flor: req.body.flor,
+        typeOfHeating: req.body.typeOfHeating
+
+    })
+    console.log(req)
+    try{
+        const newHouse = await house.save()
         res.status(201).json(newHouse)
     }catch(err){
         res.status(400).json({message: err.message})
-
     }
-
 })
+
+
+
+// Create one
+// router.post('/',(req,res) => {
+//     if(!req.body){
+//         res.status(400).send({message:"cannot be empty"});
+//         return;
+//     }
+
+//     const house = new Housedb({
+//         name:req.body.name
+//     })
+
+//     house
+//         .save(house)
+//         .then(data=>{
+//             res.send(data)
+//         })
+//         .catch(err=>{
+//             res.status(500).send({
+//                 message:err.message || "some error"
+//             });
+//         });
+// })
 
 // // Update one
 // router.patch('/', (req, res) =>{
