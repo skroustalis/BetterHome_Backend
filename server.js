@@ -2,6 +2,8 @@ if(process.env.NODE_ENV !== "production"){
     require('dotenv').config()
 }
 
+const http = require('http');
+const url = require('url')
 const express = require('express')
 const bodyparser=require('body-parser')
 const dotenv = require('dotenv')
@@ -28,6 +30,11 @@ app.use(bodyparser.urlencoded({
 const housesRouter =require('./routes/houseRoutes')
 app.use('/', housesRouter)
 
-let port = process.env.PORT || 3000
+http.createServer(function(req,res){
+    const obj = url.parse(request.url)
+    console.log(obj)
+    res.end('url ...')
+})
 
+let port = process.env.PORT || 3000
 app.listen(port, () => console.log('server Started'))
