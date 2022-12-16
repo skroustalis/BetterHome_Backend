@@ -1,6 +1,6 @@
-// if(process.env.NODE_ENV !== "production"){
-//     require('dotenv').config()
-// }
+if(process.env.NODE_ENV !== "production"){
+    require('dotenv').config()
+}
 
 const express = require('express')
 const bodyparser=require('body-parser')
@@ -8,7 +8,7 @@ const dotenv = require('dotenv')
 const expressLayouts = require('express-ejs-layouts')
 
 const app = express()
-dotenv.config({path:'.env'})
+// dotenv.config({path:'.env'})
 
 const db = require('./database/connection')
 
