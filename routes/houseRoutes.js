@@ -2,33 +2,56 @@ const express = require('express')
 const router = express.Router()
 var Housedb = require('../models/houseModel')
 
-router.get('/', async (req, res) => {
+router.get('/allHouses', async (req, res) => {
     try{
-        const house = await Housedb.find()
+        const house = await Housedb.find()//.pretty()
          res.json(house)   
-        }catch (err) {
+        }catch (err) {s
             res.status(500).json({message: err.message})
         }   
 })
-router.get('/home',(req,res)=>{
-    console.log((req.query))
-    return res.json({
-        message:"hello",
-        name: req.query.name,
-        city: req.query.city,
-        //rent: req.query.rent,
-        // buy: req.query.buy,
-        // squareMeter: req.query.squareMeter,
-        // availableFrom: req.query.availableFrom,
-        // furnished: req.query.furnished,
-        // elevator: req.query.elevator,
-        // petAllowed: req.query.petAllowed,
-        // flor: req.query.flor,
-        // typeOfHeating: req.query.typeOfHeating
+router.get('/house', async (req,res)=>{
+    // console.log((req.query))
+    // return res.json({
+    //     message:"hello",
+    //     name: req.query.name,
+    let city= req.query.city
+    //     rent: req.query.rent,
+    //     buy: req.query.buy,
+    //     squareMeter: req.query.squareMeter,
+    //     availableFrom: req.query.availableFrom,
+    //     furnished: req.query.furnished,
+    //     elevator: req.query.elevator,
+    //     petAllowed: req.query.petAllowed,
+    //     flor: req.query.flor,
+    //     typeOfHeating: req.query.typeOfHeating
+    // })
+    // console.log(name)
+
+    let name = req.query.name
+
+  
+    Housedb.find({name,city},(error, data) =>{
+        if(error){
+            console.log(error)
+        }else{
+            console.log(data)
+        }
     })
+    var findHousesByCity = function(userName,cityName, done){
+        Housedb.find({name:userName, city:cityName},(error, arrayOfResults)=>{
+            if(error){
+                console.log(error)
+            }else{
+             done(null, arrayOfResults)
+            }
+        })
+    }
 })
 
-router.post('/home', async  (req, res) => {
+router.get('/house')
+
+router.post('/newHouse', async  (req, res) => {
     // var a = {name: req.body.name}
     // console.log(a)
     const house = new Housedb({
@@ -42,7 +65,9 @@ router.post('/home', async  (req, res) => {
         elevator: req.body.elevator,
         petAllowed: req.body.petAllowed,
         flor: req.body.flor,
-        typeOfHeating: req.body.typeOfHeating
+        typeOfHeating: req.body.typeOfHeating,
+        parking: req.body.parking,
+        price: req.body.price
 
     })
     console.log(req)

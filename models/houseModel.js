@@ -10,16 +10,16 @@ var houseSchema = new mongoose.Schema({
         required:true
     },
     rent:{
-        type:String
+        type:Boolean
     },
     buy:{
-        type:Number
+        type:Boolean
     },
     squareMeter:{
         type:Number
     },
     availableFrom:{
-        type:Date
+        type:String
     },
     furnished:{
         type:Boolean
@@ -35,6 +35,12 @@ var houseSchema = new mongoose.Schema({
     },
     typeOfHeating:{
         type:String
+    },
+    parking:{
+        type:Boolean
+    },
+    price:{
+        type:Number
     }
     
 
@@ -42,4 +48,24 @@ var houseSchema = new mongoose.Schema({
 
 const Housedb = mongoose.model('Housedb',houseSchema )
 
-module.exports = Housedb;
+module.exports = Housedb; 
+
+
+// Housedb.find({city:'thessaloniki'},(error, data) =>{
+//     if(error){
+//         console.log(error)
+//     }else{
+//         // console.log(data)
+//     }
+// })
+
+// var findHousesByCity = function(cityName, done){
+//     Housedb.find({city: cityName},(error, arrayOfResults)=>{
+//         if(error){
+//             console.log(error)
+//         }else{
+//          done(null, arrayOfResults)
+//         }
+//     })
+//    // done(null)
+// }
