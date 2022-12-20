@@ -4,7 +4,7 @@ var Housedb = require('../models/houseModel')
 
 router.get('/allHouses', async (req, res) => {
     try{
-        const house = await Housedb.find()//.pretty()
+        const house = await Housedb.find().pretty()
          res.json(house)   
         }catch (err) {s
             res.status(500).json({message: err.message})
@@ -49,7 +49,6 @@ router.get('/house', async (req,res)=>{
     }
 })
 
-router.get('/house')
 
 router.post('/newHouse', async  (req, res) => {
     // var a = {name: req.body.name}
