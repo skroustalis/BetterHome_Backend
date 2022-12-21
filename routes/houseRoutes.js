@@ -27,25 +27,33 @@ router.get('/house', async (req,res)=>{
     //     typeOfHeating: req.query.typeOfHeating
     // })
     // console.log(name)
-
     let name = req.query.name
 
-    Housedb.find({name,city},(error, data) =>{
-        if(error){
-            console.log(error)
-        }else{
-            console.log(data)
-        }
-    })
-    var findHousesByCity = function(userName,cityName, done){
-        Housedb.find({name:userName, city:cityName},(error, arrayOfResults)=>{
-            if(error){
-                console.log(error)
-            }else{
-             done(null, arrayOfResults)
-            }
-        })
-    }
+    try{
+        const house = await Housedb.find({name, city})
+         res.json(house)   
+        }catch (err) {
+            res.status(500).json({message: err.message})
+        }  
+
+  
+
+    // Housedb.find({name,city},(error, data) =>{
+    //     if(error){
+    //         console.log(error)
+    //     }else{
+    //         console.log(data)
+    //     }
+    // })
+//     var findHousesByCity = function(userName,cityName, done){
+//         Housedb.find({name:userName, city:cityName},(error, arrayOfResults)=>{
+//             if(error){
+//                 console.log(error)
+//             }else{
+//              done(null, arrayOfResults)
+//             }
+//         })
+//     }
 })
 
 router.post('/newHouse', async  (req, res) => {
