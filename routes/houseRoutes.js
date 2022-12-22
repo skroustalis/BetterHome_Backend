@@ -10,50 +10,15 @@ router.get('/allHouses', async (req, res) => {
             res.status(500).json({message: err.message})
         }   
 })
-router.get('/house', async (req,res)=>{
-    // console.log((req.query))
-    // return res.json({
-    //     message:"hello",
-    //     name: req.query.name,
-    let city= req.query.city
-    //     rent: req.query.rent,
-    //     buy: req.query.buy,
-    //     squareMeter: req.query.squareMeter,
-    //     availableFrom: req.query.availableFrom,
-    //     furnished: req.query.furnished,
-    //     elevator: req.query.elevator,
-    //     petAllowed: req.query.petAllowed,
-    //     flor: req.query.flor,
-    //     typeOfHeating: req.query.typeOfHeating
-    // })
-    // console.log(name)
-    let name = req.query.name
+router.get('/houses', async (req,res)=>{
+    const filters = getFilters(req)
 
     try{
-        const house = await Housedb.find({name, city})
+        const house = await Housedb.find(filters)
          res.json(house)   
         }catch (err) {
             res.status(500).json({message: err.message})
-        }  
-
-  
-
-    // Housedb.find({name,city},(error, data) =>{
-    //     if(error){
-    //         console.log(error)
-    //     }else{
-    //         console.log(data)
-    //     }
-    // })
-//     var findHousesByCity = function(userName,cityName, done){
-//         Housedb.find({name:userName, city:cityName},(error, arrayOfResults)=>{
-//             if(error){
-//                 console.log(error)
-//             }else{
-//              done(null, arrayOfResults)
-//             }
-//         })
-//     }
+        } 
 })
 
 router.post('/newHouse', async  (req, res) => {
@@ -81,5 +46,55 @@ router.post('/newHouse', async  (req, res) => {
         res.status(400).json({message: err.message})
     }
 })
+
+
+
+function getFilters(request){
+    var filters = {}
+
+    if(typeof request.query.name !== 'undefined'){
+        filters['name'] = request.query.name
+    }
+    if(typeof request.query.city !== 'undefined'){
+        filters['city'] = request.query.city
+    }
+    if(typeof request.query.rent !== 'undefined'){
+        filters['rent'] = request.query.rent
+    }
+    if(typeof request.query.buy !== 'undefined'){
+        filters['buy'] = request.query.buy
+    }
+    if(typeof request.query.squareMeter !== 'undefined'){
+        filters['squareMeter'] = request.query.squareMeter
+    }
+    if(typeof request.query.availableFrom !== 'undefined'){
+        filters['availableFrom'] = request.query.availableFrom
+    }
+    if(typeof request.query.furnished !== 'undefined'){
+        filters['furnished'] = request.query.furnished
+    }
+    if(typeof request.query.elevator !== 'undefined'){
+        filters['elevator'] = request.query.elevator
+    }
+    if(typeof request.query.petAllowed !== 'undefined'){
+        filters['petAllowed'] = request.query.petAllowed
+    }
+    if(typeof request.query.floor !== 'undefined'){
+        filters['floor'] = request.query.floor
+    }
+    if(typeof request.query.typeOfHeating !== 'undefined'){
+        filters['typeOfHeating'] = request.query.typeOfHeating
+    }
+    if(typeof request.query.parking !== 'undefined'){
+        filters['parking'] = request.query.parking
+    }
+    if(typeof request.query.price !== 'undefined'){
+        filters['price'] = request.query.price
+    }
+
+    return filters
+}
+
+
 
 module.exports = router

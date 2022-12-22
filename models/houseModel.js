@@ -30,7 +30,7 @@ var houseSchema = new mongoose.Schema({
     petAllowed:{
         type:Boolean
     },
-    flor:{
+    floor:{
         type:Number
     },
     typeOfHeating:{
@@ -49,23 +49,3 @@ var houseSchema = new mongoose.Schema({
 const Housedb = mongoose.model('Housedb',houseSchema )
 
 module.exports = Housedb; 
-
-
-// Housedb.find({city:'thessaloniki'},(error, data) =>{
-//     if(error){
-//         console.log(error)
-//     }else{
-//         // console.log(data)
-//     }
-// })
-
-// var findHousesByCity = function(cityName, done){
-//     Housedb.find({city: cityName},(error, arrayOfResults)=>{
-//         if(error){
-//             console.log(error)
-//         }else{
-//          done(null, arrayOfResults)
-//         }
-//     })
-//    // done(null)
-// }
