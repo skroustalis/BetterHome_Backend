@@ -41,6 +41,9 @@ var houseSchema = new mongoose.Schema({
     },
     price:{
         type:Number
+    },
+    photo:{
+        type:String
     }
     
 

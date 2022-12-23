@@ -10,7 +10,7 @@ router.get('/allHouses', async (req, res) => {
             res.status(500).json({message: err.message})
         }   
 })
-router.get('/houses', async (req,res)=>{
+router.get('/filtered-houses', async (req,res)=>{
     const filters = getFilters(req)
 
     try{
@@ -88,8 +88,62 @@ function getFilters(request){
     if(typeof request.query.parking !== 'undefined'){
         filters['parking'] = request.query.parking
     }
-    if(typeof request.query.price !== 'undefined'){
-        filters['price'] = request.query.price
+
+    if (typeof request.query.minPrice !== 'undefined' && typeof request.query.maxPrice === "undefined"){
+        console.log(1)
+    filters['price'] = {$gte:request.query.minPrice}
+    }
+
+    if (typeof request.query.maxPrice !== 'undefined' && typeof request.query.minPrice === 'undefined'){
+        console.log(2)
+    filters['price'] = {$lte: request.query.maxPrice}
+    }   
+    
+    if (typeof request.query.minPrice !== 'undefined' && typeof request.query.maxPrice !== 'undefined'){
+        console.log(request.query.maxPrice)
+    filters['price'] = {$gte: request.query.minPrice, $lte: request.query.maxPrice}
+    }
+
+    //////
+
+    if (typeof request.query.minSquareMeter !== 'undefined' && typeof request.query.maxSquareMeter === "undefined"){
+        console.log(12)
+    filters['squareMeter'] = {$gte:request.query.minSquareMeter}
+    }
+
+    if (typeof request.query.maxSquareMeter !== 'undefined' && typeof request.query.minSquareMeter === 'undefined'){
+        console.log(21)
+    filters['squareMeter'] = {$lte: request.query.maxSquareMeter}
+    }   
+    
+    if (typeof request.query.minSquareMeter !== 'undefined' && typeof request.query.maxSquareMeter !== 'undefined'){
+        console.log(request.query.maxSquareMeter)
+    filters['squareMeter'] = {$gte: request.query.minSquareMeter, $lte: request.query.maxSquareMeter}
+    }
+
+    /////
+
+    if (typeof request.query.minFloor !== 'undefined' && typeof request.query.maxFloor === "undefined"){
+        console.log(12)
+    filters['floor'] = {$gte:request.query.minFloor}
+    }
+
+    if (typeof request.query.maxFloor !== 'undefined' && typeof request.query.minFloor === 'undefined'){
+        console.log(21)
+    filters['floor'] = {$lte: request.query.maxFloor}
+    }   
+    
+    if (typeof request.query.minFloor !== 'undefined' && typeof request.query.maxFloor !== 'undefined'){
+        console.log(request.query.maxFloor)
+    filters['floor'] = {$gte: request.query.minFloor, $lte: request.query.maxFloor}
+    }
+
+    
+
+
+    
+    if(typeof request.query.photo !== 'undefined'){
+        filters['photo'] = request.query.photo
     }
 
     return filters
