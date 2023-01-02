@@ -10,7 +10,6 @@ const dotenv = require('dotenv')
 const expressLayouts = require('express-ejs-layouts')
 
 const app = express()
-// dotenv.config({path:'.env'})
 
 const db = require('./database/connection')
 
